@@ -9,7 +9,7 @@ class DungeonTest {
     public class DungeonGame implements Serializable{
         public int x = 3;
         transient long y = 4;
-        private short z = 5;
+        private short z = 6;
     }
 
 
