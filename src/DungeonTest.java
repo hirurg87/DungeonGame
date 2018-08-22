@@ -1,17 +1,53 @@
 import java.io.*;
-import java.sql.SQLOutput;
+
 
 class DungeonTest {
     public static void main(String[] args) {
+        DungeonGame d = new DungeonGame();
+        System.out.println(d.getX() + d.getY() + d.getZ());
+
+        try {
+            FileOutputStream fos = new FileOutputStream("dg.ser");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(d);
+            oos.close();
+        }catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            FileInputStream fis = new FileInputStream("dg.ser");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            d = (DungeonGame) ois.readObject();
+            ois.close();
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        System.out.println(d.getX() + d.getY() + d.getZ());
+
 
     }
+}
 
-    public class DungeonGame implements Serializable{
+    class DungeonGame implements Serializable{
         public int x = 3;
         transient long y = 4;
-        private short z = 6;
+        private short z = 5;
+
+        int getX(){
+            return x;
+        }
+
+        long getY(){
+            return y;
+        }
+
+        short getZ(){
+            return z;
+        }
     }
 
 
 
-}
+
